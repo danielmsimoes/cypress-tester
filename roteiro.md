@@ -1,73 +1,102 @@
-====================================================================
-Funcionalidade: Cadastro no site Adopet
+# Casos de Teste – Sistema Adopet
+## Funcionalidade: Cadastro no site
+### Cenário 1: Realizar cadastro com sucesso
 
-Cenário: Realizar um cadastro no site com sucesso
+Pré-condição: Usuário na página de cadastro.
 
-Passos:
+### Passos
 
-O usuário deixa os campos obrigatórios em branco (nome, email, senha e confirmação de senha) em branco
-O usuário clica no botão cadastrar
+1. Deixar os campos obrigatórios (Nome, E-mail, Senha e Confirmação de Senha) em branco
 
-Resultados Esperados:
+2. Clicar no botão Cadastrar
 
-O sistema valida os campos obrigatórios em branco. 
-O sistema exibe mensagens de erro indicando que os campos obrigatórios devem ser preenchidos
-O usuário preenche o campo "E-mail" com um endereço de e-mail válido
-O usuário preenche o campo "Senha" com uma senha válida
-O usuário preenche o campo "Confirmação de Senha" com a mesma senha inserida no passo anterior
-O usuário clica no botão "Cadastrar"
+3. Preencher o campo E-mail com um endereço válido
 
-Resultados Esperados:
+4. Preencher o campo Senha com uma senha válida
 
-O sistema processa as informações fornecidas.
+5. Preencher o campo Confirmação de Senha com a mesma senha
 
-Regra de Negócio:
+6. Clicar novamente no botão Cadastrar
 
-E-mail e senha são campos obrigatórios para o cadastro.
+### Resultados Esperados
 
-=====================================================================
-Cenário: Falha na tentativa de cadastro
+* O sistema valida os campos obrigatórios
 
-Passos: 
-O usuário acessa a página de cadastro.
-O usuário deixa os campos obrigatórios em branco (nome, email, senha e confirmação de senha) em branco
-O usuário clica no botão cadastrar
+* O sistema exibe mensagens de erro para campos vazios
 
-Resultados Esperados:
+* O sistema processa corretamente as informações após preenchimento válido
 
-O sistema valida os campos obrigatórios em branco. 
-O sistema exibe mensagens de erro indicando que os campos obrigatórios devem ser preenchidos
-=====================================================================
+### Regra de Negócio
 
-Funcionalidade: Login no site Adopet
-Cenário: Login no sistema com sucesso
+E-mail e Senha são campos obrigatórios
 
-Passos: 
+### Cenário 2: Falha ao tentar cadastrar com campos vazios
 
-O usuário acessa a página de login do Adopet
-O usuário insere seu email "ana@email.com" e senha "Senha123" nos campos correspondentes.
-O usuário clica no botão "Entrar".
+Pré-condição: Usuário na página de cadastro.
 
-Resultados esperados:
+### Passos
 
-O sistema autentica as credencias fornecidas 
-O sistema redireciona o usuário para a página "/home"
-=====================================================================
+1. Deixar os campos obrigatórios em branco
 
-Funcionalidade: Login no site Adopet
-Cenário: Falha no login do sistema
+2. Clicar no botão Cadastrar
 
-Passos: 
+### Resultados Esperados
 
-O usuário acessa a página de login.
-O usuário insere um email e senha fora do padrão aceiro nos campos correspondentes. 
-O usuário clica no botão "Enter".
+* O sistema valida os campos obrigatórios
 
-Resultados esperados:
-O sistema valida as credenciais fornecidas.
-O sistema exibe mensagens de erro específicas para o e-mail e senha inseridos incorretamente, como: "Por favor, verifique o e-mail digitado" e/ou "A senha deve conter pelo menos uma letra maiúscula, um número e ter entre 6 e 15 caracteres".
+* O sistema exibe mensagens de erro indicando que os campos devem ser preenchidos
 
-Regra de Negócio:
+## Funcionalidade: Login no site
+### Cenário 3: Login com sucesso
 
-O e-mail deve ter um formato válido.
-A senha deve conter pelo menos uma letra maiúscula, um número e ter entre 6 e 15 caracteres
+Pré-condição: Usuário previamente cadastrado.
+
+### Passos
+
+1. Acessar a página de login
+
+2. Inserir o e-mail ana@email.com
+
+3. Inserir a senha Senha123
+
+4. Clicar no botão Entrar
+
+### Resultados Esperados
+
+* O sistema autentica as credenciais
+
+* O usuário é redirecionado para /home
+
+### Cenário 4: Falha no login
+
+Pré-condição: Usuário na página de login.
+
+### Passos
+
+1. Inserir e-mail em formato inválido
+
+2. Inserir senha fora do padrão aceito
+
+3. Clicar no botão Entrar
+
+### Resultados Esperados
+
+* O sistema valida as credenciais
+
+* O sistema exibe mensagens como:
+
+* "Por favor, verifique o e-mail digitado"
+
+* "A senha deve conter pelo menos uma letra maiúscula, um número e ter entre 6 e 15 caracteres"
+
+### Regra de Negócio
+
+* O e-mail deve ter formato válido
+
+* A senha deve conter:
+
+* Pelo menos 1 letra maiúscula
+
+* Pelo menos 1 número
+
+* Entre 6 e 15 caracteres
