@@ -1,23 +1,19 @@
 describe('Página de login', () => {
     beforeEach(() => {
-        cy.visit('https://adopet-frontend-cypress.vercel.app/login')
-    })
-    //Testando campos de forma individual com valores errados 
-    // it('Acessa a página de login e preenche o campo de email com dados inválidos e verifica o erro',() => {
-    //    cy.get('[data-test="input-loginEmail"]').type('daniel.com')
-    //    cy.get('[data-test="input-loginPassword"]').type('Senha@123')
-    //    cy.get('[data-test="submit-button"]').click()
-    //    cy.contains('Por favor, verifique o email digitado').should('be.visible')
-    // })
-    // it('Acessa a página de login e preenche o campo de senha incorretamente e verifica o erro', () => {
-    //     cy.get('[data-test="input-loginEmail"]').type('ana@email.com')
-    //     cy.get('[data-test="input-loginPassword"]').type('abcd')
-    //     cy.get('[data-test="submit-button"]').click()
-    //     cy.contains('A senha deve conter pelo menos uma letra maiúscula, um número e ter entre 6 e 15 caracteres').should('be.visible')
-    // })
+        cy.visit('https://adopet-frontend-cypress.vercel.app/')
+        cy.get('[data-test="login-button"]').click();
+        cy.intercept('POST', 'https://adopet-api-i8qu.onrender.com/adotante/login', {
+            statusCode:400, }).as('stubPost')
+        })
     it('Acessa a página de login e preenche o campo de email e senha incorretamente e verifica ambos erros', () =>{
-        cy.login('daniel.com', 'abcd')
-        cy.contains('Por favor, verifique o email digitado').should('be.visible')
-        cy.contains('A senha deve conter pelo menos uma letra maiúscula, um número e ter entre 6 e 15 caracteres').should('be.visible')
+        cy.get('[data-test="submit-button"]').click()
+        cy.contains('É necessário informar um endereço de email').should('be.visible')
+        cy.contains('Insira sua senha').should('be.visible')
+    })
+
+    it('Deve falhar mesmo que os campos sejam preenchidos corretamente', () => {
+        cy.login('ana@email.com', 'Senha123')
+        cy.wait('@stubPost')
+        cy.contains('Falha no login. Consulte suas credenciais.').should('be.visible')
     })
 })
