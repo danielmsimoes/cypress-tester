@@ -1,15 +1,14 @@
-describe('API - Adopet', () => {
-    const authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMTY0M2NkNi03MTEyLTQxNWItOTVkMi0wNzkwNGIwZDFhMWMiLCJhZG9wdGVyTmFtZSI6IkFuYSBkZSBKZXN1cyIsImlhdCI6MTc3MjY1MDM1MiwiZXhwIjoxNzcyOTA5NTUyfQ.8yRyW7xFbb9Lafk1h_3nzcxuPDBXA4Mgpky90RR19GE`
-    
-    it ('Mensagens da API', () => {
+describe('API Adopet', () => {
+
+    it('Mensagens para a API', () => {
         cy.request({
             method: 'GET',
             url: 'https://adopet-api-i8qu.onrender.com/mensagem/11643cd6-7112-415b-95d2-07904b0d1a1c',
-            headers: { authorization }
-        }).then((res) => {
-            expect(res.status).to.be.equal(200)
-            expect(res.body).is.not.empty
-            expect(res.body).to.have.property('msg')
+            headers: Cypress.env()
+        }).then((response) => {
+            expect(response.status).to.be.equal(200)
+            expect(response.body).is.not.empty
+            expect(response.body).to.have.property('msg')
         })
     })
 })

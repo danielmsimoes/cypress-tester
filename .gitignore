@@ -3,3 +3,4 @@ node_modules/
 /logs/
 *.tmp
 assets/
+cypress.env.json
