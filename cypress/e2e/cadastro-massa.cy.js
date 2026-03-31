@@ -1,4 +1,5 @@
 import { usuarios } from '../fixtures/usuarios.json'
+import CadastroPage from '../../pages/CadastroPage';
 
 describe('Página de cadastro', () => {
   beforeEach(() => {
@@ -7,11 +8,11 @@ describe('Página de cadastro', () => {
 })
   usuarios.forEach(usuario => {
     it('Deve preencher os campos do formulário corretamente para cadastrar um novo usuário', () =>{
-        cy.get('[data-test="input-name"]').clear().type(usuario.name)
-        cy.get('[data-test="input-email"]').clear().type(usuario.email)
-        cy.get('[data-test="input-password"]').clear().type(usuario.password)
-        cy.get('[data-test="input-password"]').clear().type(usuario.password)
-        cy.get('[data-test="submit-button"]').click()
+        CadastroPage.elements.inputNome().clear().type(usuario.name)
+        CadastroPage.elements.inputEmail().clear().type(usuario.email)
+        CadastroPage.elements.inputSenha().clear().type(usuario.password)
+        CadastroPage.elements.inputConfirmarSenha().clear().type(usuario.password)
+        CadastroPage.elements.botaoEnviarCadastro().click()
     })
   })
 })

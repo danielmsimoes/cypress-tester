@@ -1,19 +1,23 @@
+import LoginPage from "../../pages/LoginPage";
+
 describe('Página de login', () => {
     beforeEach(() => {
-        cy.visit('https://adopet-frontend-cypress.vercel.app/')
-        cy.get('[data-test="login-button"]').click();
-        cy.intercept('POST', 'https://adopet-api-i8qu.onrender.com/adotante/login', {
-            statusCode:400, }).as('stubPost')
-        })
-    it('Acessa a página de login e preenche o campo de email e senha incorretamente e verifica ambos erros', () =>{
-        cy.get('[data-test="submit-button"]').click()
-        cy.contains('É necessário informar um endereço de email').should('be.visible')
-        cy.contains('Insira sua senha').should('be.visible')
+        LoginPage.acessarPaginaInicial()
+        LoginPage.IrParaLogin()
+    })
+
+    it('Acessa a página de login, não preenche o campo de email e senha e clica em entrar e verifica ambos erros', () => {
+        LoginPage.submeterLogin()
+        LoginPage.validarInputsVazios()
     })
 
     it('Deve falhar mesmo que os campos sejam preenchidos corretamente', () => {
-        cy.login('ana@email.com', 'Senha123')
+
+        cy.intercept('POST', 'https://adopet-api-i8qu.onrender.com/adotante/login', {
+            statusCode:400, }).as('stubPost')
+
+        LoginPage.realizarLogin('ana@email.com', 'Senha123')
         cy.wait('@stubPost')
-        cy.contains('Falha no login. Consulte suas credenciais.').should('be.visible')
+        LoginPage.validarLoginError()
     })
 })
